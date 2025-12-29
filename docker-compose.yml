@@ -6,6 +6,8 @@ services:
       context: ./mern-task-manager-backend
     ports:
       - "5000:5000"
+    env_file:
+      - ./mern-task-manager-backend/.env
     networks:
       - mern-network
     depends_on:
