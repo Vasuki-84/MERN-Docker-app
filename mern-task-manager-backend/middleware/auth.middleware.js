@@ -17,7 +17,7 @@ const authMiddleware = (allowedRoles = []) => {
 
       req.user = decoded;
 
-      if (!allowedRoles.length === 0) {
+      if (allowedRoles.length === 0) {
         return next();
       }
       if (!allowedRoles.includes(decoded.role)) {

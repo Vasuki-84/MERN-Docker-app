@@ -14,8 +14,9 @@ services:
   frontend:
     build:
       context: ./mern-task-manager-frontend/frontend
+    dockerfile: Dockerfile
     ports:
-      - "8000:80"
+      - "3000:3000"
     networks:
       - mern-network
     depends_on:

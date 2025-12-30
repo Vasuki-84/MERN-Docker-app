@@ -1,36 +1,39 @@
 version: "3.8"
 
 services:
+  mongo:
+    image: mongo:6.0
+    container_name: mongo
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - mern-network
+    ports:
+    - "27017:27017"
+
   backend:
     build:
       context: ./mern-task-manager-backend
+    container_name: backend
     ports:
       - "5000:5000"
     env_file:
       - ./mern-task-manager-backend/.env
-    networks:
-      - mern-network
     depends_on:
       - mongo
+    networks:
+      - mern-network
 
   frontend:
     build:
       context: ./mern-task-manager-frontend/frontend
+    container_name: frontend
     ports:
       - "8000:80"
-    networks:
-      - mern-network
     depends_on:
       - backend
-
-  mongo:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
     networks:
       - mern-network
-    volumes:
-      - mongo-data:/data/db
 
 networks:
   mern-network:
